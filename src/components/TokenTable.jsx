@@ -1,30 +1,42 @@
 export default function TokenTable({
   tokens,
+  error,
 }) {
-  if (!tokens.length) {
-  return (
-    <div className="empty-state">
-      <div className="empty-icon">
-        {"{ }"}
-      </div>
+  if (error) {
+    return (
+      <div className="token-error">
+        <div className="error-header">
+          <span className="error-icon">
+            !
+          </span>
+          <span>
+            Lexical Error
+          </span>
+        </div>
 
-      <p>
-        Write some code and click{" "}
-        <strong>Analyse</strong> to see
-        the tokens.
-      </p>
-    </div>
-  );
-}
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  if (!tokens.length) {
+    return (
+      <div className="empty-state">
+        <div className="empty-icon">
+          {"{ }"}
+        </div>
+
+        <p>
+          Write some code and click{" "}
+          <strong>Analyse</strong> to
+          see the tokens.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>
-      <div className="token-header">
-        {tokens.length} token
-        {tokens.length !== 1 ? "s" : ""}
-        {" "}found
-      </div>
-
       <table>
         <thead>
           <tr>
@@ -41,12 +53,23 @@ export default function TokenTable({
             (token, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
+
                 <td>
-                  {token.lexeme || "EOF"}
+                  {token.lexeme ||
+                    "␀"}
                 </td>
-                <td>{token.type}</td>
-                <td>{token.line}</td>
-                <td>{token.column}</td>
+
+                <td>
+                  {token.type}
+                </td>
+
+                <td>
+                  {token.line}
+                </td>
+
+                <td>
+                  {token.column}
+                </td>
               </tr>
             )
           )}

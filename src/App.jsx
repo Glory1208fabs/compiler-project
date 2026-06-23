@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import Editor from "./components/Editor";
-import TokenTable from "./components/TokenTable";
-import ErrorPanel from "./components/ErrorPanel";
+import TokenTable from "./components/TokenTable"
 
 import {
   tokenize,
@@ -81,16 +80,14 @@ export default function App() {
               Analyse
             </button>
           </div>
-
-          <ErrorPanel
-            error={error}
-          />
+          
         </section>
 
         <section>
           <TokenTable
             tokens={tokens}
-          />
+            error={error}
+         />
         </section>
       </main>
     </div>
