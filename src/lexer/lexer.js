@@ -1,4 +1,32 @@
-const KEYWORDS = new Set(["let", "print"]);
+const KEYWORDS = new Set([
+  "print",
+  "if",
+  "else",
+  "elif",
+  "for",
+  "while",
+  "def",
+  "return",
+  "class",
+  "import",
+  "from",
+  "as",
+  "try",
+  "except",
+  "finally",
+  "with",
+  "pass",
+  "break",
+  "continue",
+  "True",
+  "False",
+  "None",
+  "and",
+  "or",
+  "not",
+  "in",
+  "is"
+]);
 
 const SYMBOLS = {
   "=": "ASSIGN",
@@ -6,9 +34,16 @@ const SYMBOLS = {
   "-": "MINUS",
   "*": "STAR",
   "/": "SLASH",
+  "%": "MODULO",
   "(": "LPAREN",
   ")": "RPAREN",
-  ";": "SEMICOLON",
+  ":": "COLON",
+  ",": "COMMA",
+  ".": "DOT",
+  "[": "LBRACKET",
+  "]": "RBRACKET",
+  "{": "LBRACE",
+  "}": "RBRACE",
 };
 
 export class LexError extends Error {
@@ -87,6 +122,46 @@ export function tokenize(source) {
 
       continue;
     }
+
+  if (c === '"' || c === "'") {
+    const quote = c;
+    const startCol = col;
+
+      i++;
+     col++;
+
+    const start = i;
+
+  while (
+    i < source.length &&
+    source[i] !== quote
+  ) {
+    i++;
+    col++;
+  }
+
+  if (i >= source.length) {
+    throw new LexError(
+      "Unterminated string",
+      line,
+      startCol
+    );
+  }
+
+  const value = source.slice(start, i);
+
+  tokens.push({
+    type: "STRING",
+    lexeme: value,
+    line,
+    column: startCol,
+  });
+
+  i++;
+  col++;
+
+  continue;
+  }   
 
     if (SYMBOLS[c]) {
       tokens.push({

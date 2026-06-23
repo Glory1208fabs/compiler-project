@@ -326,6 +326,12 @@ p, span {
   color: var(--text-color);
 }
 
+span {
+  font-family:'JetBrains Mono', monospace; 
+  font-size:11px; 
+  color:var(--ink-soft); 
+  letter-spacing:0.04em
+}
 .empty-state {
   min-height: 420px;
   display: flex;

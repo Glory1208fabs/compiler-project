@@ -7,6 +7,7 @@ export default function Header({
     <header className="header">
       <div className="header-left">
         <h1>Mini Compiler Visualizer</h1>
+        <span>lexer · source &#8594; tokens</span>
       </div>
 
       <div className="header-right">
@@ -21,7 +22,7 @@ export default function Header({
             setDarkMode(!darkMode)
           }
         >
-          {darkMode ? "  Light" : "   Dark"}
+          {darkMode ? " \u25D1 Light" : " \u25D0  Dark"}
         </button>
       </div>
     </header>

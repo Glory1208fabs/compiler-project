@@ -29,9 +29,9 @@ export default function Editor({
           }
           placeholder="Write some code, e.g.
           
-let x = 5;
-let y = x + 10;
-print(y);"
+x = 5
+y = x + 10
+print(y)"
         />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Editor from "./components/Editor";
 import TokenTable from "./components/TokenTable"
@@ -19,8 +19,17 @@ export default function App() {
   const [error, setError] =
     useState("");
 
-  const [darkMode, setDarkMode] =
-    useState(false);
+ const [darkMode, setDarkMode] = useState(() => {
+  const savedTheme = localStorage.getItem("darkMode");
+  return savedTheme ? JSON.parse(savedTheme) : false;
+  });
+
+  useEffect(() => {
+  localStorage.setItem(
+    "darkMode",
+    JSON.stringify(darkMode)
+  );
+ }, [darkMode]);
 
   function handleAnalyse() {
     try {
